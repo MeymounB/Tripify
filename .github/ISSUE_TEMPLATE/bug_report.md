@@ -1,8 +1,8 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: '[BUG] Short Description'
+labels: 'bug'
 assignees: ''
 
 ---
@@ -36,3 +36,6 @@ If applicable, add screenshots to help explain your problem.
 
 **Additional context**
 Add any other context about the problem here.
+
+**Check if the issue has already been reported**
+Please check if this issue has already been reported to avoid duplicates.
