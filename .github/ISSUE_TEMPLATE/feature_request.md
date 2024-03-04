@@ -1,8 +1,8 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
+title: '[FEATURE] Short description'
+labels: 'feature'
 assignees: ''
 
 ---
@@ -18,3 +18,7 @@ A clear and concise description of any alternative solutions or features you've 
 
 **Additional context**
 Add any other context or screenshots about the feature request here.
+
+**Viability and Impact**
+- Do you know if your request is technically feasible?
+- How do you think this feature would improve the project or is necessary?
