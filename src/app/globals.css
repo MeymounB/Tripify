@@ -7,6 +7,11 @@
   min-height: calc(100vh - 56px);
 }
 
+.mid-icon {
+  width: 20px;
+  height: 20px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
