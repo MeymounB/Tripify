@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import { Icon } from "@iconify/react";
 
+import { Icon } from "@iconify/react";
+
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
