@@ -14,10 +14,7 @@ import {
 export default function NotFound() {
   return (
     <>
-      <div
-        id="main_section"
-        className="flex items-center justify-center bg-cyan-500"
-      >
+      <div className="flex h-full items-center justify-center bg-cyan-500">
         <Card className="w-[420px]">
           <CardHeader className="text-center">
             <CardTitle className="text-4xl lg:text-7xl">404</CardTitle>
