@@ -3,8 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 
-import Image from "next/image";
-import homeIcon from "@/assets/svg/home.svg";
+import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
 import {
@@ -48,7 +47,7 @@ export function Navbar() {
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} gap-2 `}
               >
-                <Image priority src={homeIcon} alt="Home logo" />
+                <Icon icon="mdi:home" className="mid-icon" />
                 Home
               </NavigationMenuLink>
             </Link>
