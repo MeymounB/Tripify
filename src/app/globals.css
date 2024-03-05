@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#main_section {
-  /* 56px is the height of the header */
-  min-height: calc(100vh - 56px);
-}
-
-.mid-icon {
-  width: 20px;
-  height: 20px;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

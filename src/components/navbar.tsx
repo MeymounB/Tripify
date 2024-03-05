@@ -47,7 +47,7 @@ export function Navbar() {
               <NavigationMenuLink
                 className={`${navigationMenuTriggerStyle()} gap-2 `}
               >
-                <Icon icon="mdi:home" className="mid-icon" />
+                <Icon icon="mdi:home" className="h-5 w-5" />
                 Home
               </NavigationMenuLink>
             </Link>
