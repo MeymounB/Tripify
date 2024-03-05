@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#main_section {
-  /* 56px is the height of the header */
-  min-height: calc(100vh - 56px);
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

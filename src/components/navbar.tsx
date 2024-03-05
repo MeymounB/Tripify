@@ -3,6 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 
+import { Icon } from "@iconify/react";
+
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -41,6 +43,17 @@ export function Navbar() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
+            <Link href="/" legacyBehavior passHref>
+              <NavigationMenuLink
+                className={`${navigationMenuTriggerStyle()} gap-2 `}
+              >
+                <Icon icon="mdi:home" className="h-5 w-5" />
+                Home
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
             <NavigationMenuTrigger>Travel</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -56,6 +69,7 @@ export function Navbar() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+
           <NavigationMenuItem>
             <Link href="/docs" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
