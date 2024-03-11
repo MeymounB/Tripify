@@ -1,4 +1,4 @@
-import homepage_background from "@/assets/homepage.jpg";
+import HomePageBackground from "@/assets/homepage.jpg";
 import Image from "next/image";
 import PlanTripButton from "../components/homepage/PlanTripButton";
 
@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <Image
-        src={homepage_background}
+        src={HomePageBackground}
         alt=""
         className="absolute left-0 top-0 z-0 h-full w-full object-cover brightness-[0.6]"
       />
