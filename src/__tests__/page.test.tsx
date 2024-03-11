@@ -5,6 +5,6 @@ import Home from "../app/page";
 test("Home", () => {
   render(<Home />);
   expect(
-    screen.getByRole("heading", { level: 2, name: "Docs ->" }),
+    screen.getByRole("heading", { level: 1, name: "ROAD TRIP PLANNER" }),
   ).toBeDefined();
 });
