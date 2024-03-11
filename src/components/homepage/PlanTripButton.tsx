@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import React from 'react';
+import { Button } from "@/components/ui/button"
+
 
 interface RedirectButtonProps {
   targetPage: string;
@@ -11,9 +13,7 @@ interface RedirectButtonProps {
 const RedirectButton: React.FC<RedirectButtonProps> = ({ targetPage, buttonText }) => {
   return (
     <Link href={targetPage}>
-    
-        <button>{buttonText}</button>
-
+        <Button variant="outline">{buttonText}</Button>
     </Link>
   );
 };
