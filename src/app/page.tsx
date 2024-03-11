@@ -5,7 +5,7 @@ export default function Home() {
     <div className = "flex items-center justify-center w-full h-full bg-cover bg-[url('../../public/homepage.jpg')] opacity-100">
       <div className = "w-3/4 mx-auto py-5 flex flex-col items-center justify-center">
         <div className = "text-3xl text-white p-5 font-bold">
-          ROAD TRIP PLANNER
+          <h1>ROAD TRIP PLANNER</h1>
         </div>
         <div className = "text-m text-white m-5 p-1 bg-slate-500 rounded-md shadow-xl">
           Let us guide you on your next great adventure
