@@ -5,9 +5,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <section className={cn("bg-background font-sans antialiased")}>
-      {children}
-    </section>
-  );
+  return <section className={cn("h-full w-full")}>{children}</section>;
 }
