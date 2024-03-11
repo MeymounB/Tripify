@@ -1,12 +1,12 @@
 import Dexie, { Table } from "dexie";
 
-// export interface exampleTableType {
-//   id?: number;
-//   value: string
-// }
+export interface userSearchTable {
+  id?: number;
+  searchHistory: string[];
+}
 
 export class CustomDexie extends Dexie {
-  //   exampleTable!: Table<exampleTableType>;
+  userSearchTable!: Table<userSearchTable>;
 
   constructor(schema: { [tableName: string]: string | null }) {
     super("database");
@@ -15,13 +15,11 @@ export class CustomDexie extends Dexie {
   }
 }
 
-export const db = new CustomDexie({
-  // add one or more Dexie tables to the schema here
-  // Format =
-  // tableName: '++id, firstKey, secondKey'
-  // So, with our current example =
-  // exampleTable: '++id, value'
-});
+export const databaseSchema = {
+  userSearchTable: "++id, searchHistory",
+};
+
+export const db = new CustomDexie(databaseSchema);
 
 // How to use the database we just created in a component
 // If you did everything correctly, it should be fully typed:
