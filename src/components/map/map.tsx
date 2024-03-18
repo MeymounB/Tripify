@@ -18,8 +18,8 @@ export default function Map() {
       className="h-full w-full bg-gray-300"
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {waypoints.map((waypoint) => (
-        <Pin position={[waypoint.y, waypoint.x]} />
+      {waypoints.map((waypoint, index: number) => (
+        <Pin key={index} position={[waypoint.y, waypoint.x]} />
       ))}
     </MapContainer>
   );
