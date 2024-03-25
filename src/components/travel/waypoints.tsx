@@ -1,83 +1,83 @@
 "use client";
 
 import { LazySearch } from "@/components/travel/search-lazy";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { XYCoord } from "dnd-core";
 import { SearchResult } from "@/lib/types";
 import { MapContext } from "@/components/map/map-provider";
+import { Icon } from "@iconify/react";
+import { cn } from "@/lib/utils";
 
 interface IWaypoint {
   index: number;
   value: string;
-  switchWaypoints: (aIndex: number, bIndex: number) => void;
-  addWaypoint: (waypoint: SearchResult) => void;
+  moveWaypoints: (aIndex: number, bIndex: number) => void;
+  updateWaypoint: (waypoint: SearchResult) => void;
+  currentHovered: number | null;
+  setCurrentHovered: (index: number | null) => void;
 }
 
-function Waypoint({ value, index, switchWaypoints, addWaypoint }: IWaypoint) {
+function Waypoint({
+  value,
+  index,
+  moveWaypoints,
+  updateWaypoint,
+  currentHovered,
+  setCurrentHovered,
+}: IWaypoint) {
   const ref = useRef<HTMLDivElement>(null);
-  const [{ handlerId }, drop] = useDrop({
+  const [_handler, drop] = useDrop({
     accept: "card",
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item: unknown, monitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = item.index;
+
+    drop(item: unknown, monitor) {
+      if (!ref.current) return;
+
+      const dragIndex = (item as { index: number }).index;
       const hoverIndex = index;
 
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-      // Determine mouse position
       const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
-      // Get pixels to the top
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
+      if (hoverClientY < hoverMiddleY) moveWaypoints(dragIndex, hoverIndex);
+      if (hoverClientY > hoverMiddleY) moveWaypoints(dragIndex, hoverIndex + 1);
 
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
+      (item as { index: number }).index = hoverIndex;
+      setCurrentHovered(-1);
+    },
+    hover(item: unknown, monitor) {
+      // check if hover is over or under
+      if (!ref.current) return;
 
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
+      const dragIndex = (item as { index: number }).index;
+      const hoverIndex = index;
 
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
+      if (dragIndex === hoverIndex) return;
 
-      // Time to actually perform the action
-      switchWaypoints(dragIndex, hoverIndex);
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
 
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
-      item.index = hoverIndex;
+      if (hoverClientY < hoverMiddleY) setCurrentHovered(hoverIndex);
+      else setCurrentHovered(hoverIndex + 1);
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
+  const [_, drag] = useDrag({
     type: "card",
-    item: () => {
-      return { index };
+    end: (item, monitor) => {
+      setCurrentHovered(-1);
     },
+    item: () => ({ index }),
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -86,24 +86,37 @@ function Waypoint({ value, index, switchWaypoints, addWaypoint }: IWaypoint) {
   drag(drop(ref));
 
   return (
-    <div ref={ref} className="w-[400px]">
-      <LazySearch value={value} onSelect={addWaypoint} />
+    <div
+      ref={ref}
+      className={cn("w-[400px] rounded-lg border-y-2 border-y-transparent", {
+        "border-b-sky-500 border-t-transparent": currentHovered === index + 1,
+        "border-b-transparent border-t-sky-500": currentHovered === index,
+      })}
+    >
+      <LazySearch onSelect={updateWaypoint}>
+        <div className="flex w-full items-center gap-2 p-2">
+          <Icon
+            icon="akar-icons:drag-vertical-fill"
+            className="aspect-square h-full flex-grow text-foreground/50"
+          />
+          <p className="w-full flex-shrink truncate">{value}</p>
+        </div>
+      </LazySearch>
     </div>
   );
 }
 
 export function Waypoints() {
   const { waypoints, setWaypoints } = useContext(MapContext);
+  const [currentHovered, setCurrentHovered] = useState<number | null>(null);
 
-  const handleSwitchWaypoints = (aIndex: number, bIndex: number) => {
-    const a = waypoints[aIndex];
-    const b = waypoints[bIndex];
-
+  const handleMoveWaypoints = (dragIndex: number, hoverIndex: number) => {
     setWaypoints((prev: SearchResult[]) => {
       const newWaypoints = [...prev];
+      const dragWaypoint = prev[dragIndex];
 
-      newWaypoints[aIndex] = b;
-      newWaypoints[bIndex] = a;
+      newWaypoints.splice(dragIndex, 1);
+      newWaypoints.splice(hoverIndex, 0, dragWaypoint);
 
       return newWaypoints;
     });
@@ -113,19 +126,35 @@ export function Waypoints() {
     setWaypoints((prev: SearchResult[]) => [...prev, waypoint]);
   };
 
+  const handleUpdateWaypoint = (index: number, waypoint: SearchResult) => {
+    setWaypoints((prev: SearchResult[]) => {
+      const newWaypoints = [...prev];
+      newWaypoints[index] = waypoint;
+
+      return newWaypoints;
+    });
+  };
+
   return (
-    <div className="flex w-[400px] flex-col gap-2">
+    <div className="flex w-[400px] flex-col gap-1">
       {waypoints.map((waypoint, index) => (
         <Waypoint
           key={index}
           index={index}
           value={waypoint.label}
-          switchWaypoints={handleSwitchWaypoints}
-          addWaypoint={handleAddWaypoint}
+          moveWaypoints={handleMoveWaypoints}
+          updateWaypoint={(waypoint) => handleUpdateWaypoint(index, waypoint)}
+          currentHovered={currentHovered}
+          setCurrentHovered={setCurrentHovered}
         />
       ))}
 
-      <LazySearch value={null} onSelect={handleAddWaypoint} />
+      <LazySearch onSelect={handleAddWaypoint}>
+        <div className="flex w-full items-center gap-2 p-2">
+          <Icon icon="akar-icons:plus" className="h-3 w-3 text-foreground/50" />
+          <p>Add waypoint</p>
+        </div>
+      </LazySearch>
     </div>
   );
 }

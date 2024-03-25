@@ -6,6 +6,7 @@ import { LatLngTuple } from "leaflet";
 import Pin from "@/components/map/pin";
 import { MapContext } from "@/components/map/map-provider";
 import "leaflet/dist/leaflet.css";
+import { Routing } from "./routing-machine";
 
 export default function Map() {
   const { waypoints } = useContext(MapContext);
@@ -21,6 +22,7 @@ export default function Map() {
       {waypoints.map((waypoint, index: number) => (
         <Pin key={index} position={[waypoint.y, waypoint.x]} />
       ))}
+      <Routing />
     </MapContainer>
   );
 }

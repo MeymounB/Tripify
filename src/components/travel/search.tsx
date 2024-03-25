@@ -9,7 +9,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import { useMemo, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import { searchQuery } from "@/lib/actions/map";
 import {
   Popover,
@@ -21,11 +21,11 @@ import { useDebounceCallback } from "usehooks-ts";
 import { SearchResult } from "@/lib/types";
 
 interface ISearch {
-  value: string | null;
   onSelect: (result: SearchResult) => void;
+  children?: ReactNode;
 }
 
-const Search = ({ onSelect, value }: ISearch) => {
+const Search = ({ onSelect, children }: ISearch) => {
   const provider = useMemo(() => new OpenStreetMapProvider(), []);
   const [results, setResults] = useState<SearchResult[]>([]);
   const [open, setOpen] = useState(false);
@@ -40,11 +40,8 @@ const Search = ({ onSelect, value }: ISearch) => {
     <div className="flex w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className="inline-block w-[400px] justify-start truncate"
-          >
-            {value || "Add Waypoint"}
+          <Button variant="outline" className="w-[400px] p-0">
+            {children}
           </Button>
         </PopoverTrigger>
         <PopoverContent
@@ -61,9 +58,9 @@ const Search = ({ onSelect, value }: ISearch) => {
             <CommandList>
               <CommandEmpty>No results found.</CommandEmpty>
               <CommandGroup>
-                {results.map((result: SearchResult) => (
+                {results.map((result: SearchResult, index: number) => (
                   <CommandItem
-                    key={result.label}
+                    key={index}
                     value={result.label}
                     onSelect={(value: string) => {
                       const result = results.find((r) => r.label === value);
