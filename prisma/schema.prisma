@@ -15,6 +15,8 @@ datasource db {
 
 // model example TO REPLACE
 
-model JsonCity {
+model Cities {
     id        Int      @id @default(autoincrement())
+    name String 
+    postalCode Int
 }
