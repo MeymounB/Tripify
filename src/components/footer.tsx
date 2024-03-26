@@ -21,9 +21,6 @@ export function Footer() {
             </Link>
           </li>
           <li className="mb-2 mr-4 pt-4 md:mx-4 md:mb-8 md:pt-8">
-            <Link href="/legal-mentions">Legal Mentions</Link>
-          </li>
-          <li className="mb-2 mr-4 pt-4 md:mx-4 md:mb-8 md:pt-8">
             <Link href="/faq">FAQ</Link>
           </li>
           <li className="mb-2 mr-4 pt-4 md:mx-4 md:mb-8 md:pt-8">
