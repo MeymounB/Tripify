@@ -14,7 +14,7 @@ import {
 export default function NotFound() {
   return (
     <>
-      <div className="flex h-full items-center justify-center bg-cyan-500">
+      <div className="flex h-full min-h-[calc(100vh-3.5rem)] items-center justify-center bg-secondary">
         <Card className="w-[420px]">
           <CardHeader className="text-center">
             <CardTitle className="text-4xl lg:text-7xl">404</CardTitle>
@@ -24,7 +24,9 @@ export default function NotFound() {
           </CardHeader>
           <CardFooter className="flex justify-center">
             <Button asChild>
-              <Link href="/">Go Back</Link>
+              <Link href="/" className="text-[#64748B]">
+                Go Back
+              </Link>
             </Button>
           </CardFooter>
         </Card>
