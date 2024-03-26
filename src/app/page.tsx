@@ -8,8 +8,9 @@ export default function Home() {
   return (
     <>
       <section className="flex w-full flex-col gap-6 px-60 pt-40">
-        <h1 className="font-fugaz w-[55rem] text-8xl uppercase">
-          Plan your trips in <span className="text-primary">seconds</span>
+        <h1 className="w-[55rem] font-fugaz text-8xl uppercase">
+          Plan your trips in{" "}
+          <span className="underlineEffect text-primary">seconds</span>
         </h1>
 
         <p className="w-[55rem] text-2xl">
@@ -20,9 +21,9 @@ export default function Home() {
 
       <AnimatedMap />
 
-      <section className="flex">
+      <section className="flex py-20">
         <div className="flex w-1/2 flex-col gap-4 border p-10">
-          <h2 className="font-fugaz inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text text-5xl uppercase text-transparent">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-5xl uppercase text-transparent">
             Automation
           </h2>
 
@@ -39,7 +40,7 @@ export default function Home() {
         </div>
 
         <div className="flex w-1/2 flex-col gap-4 border-y p-10">
-          <h2 className="font-fugaz inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text text-5xl uppercase text-transparent">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-5xl uppercase text-transparent">
             Customization
           </h2>
 
@@ -51,8 +52,6 @@ export default function Home() {
           </ul>
         </div>
       </section>
-
-      <footer className="h-80"></footer>
     </>
   );
 }
