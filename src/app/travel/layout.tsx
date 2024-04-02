@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Providers } from "@/app/providers";
 
 export default function RootLayout({
   children,
@@ -6,8 +7,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className={cn("bg-background font-sans antialiased")}>
-      {children}
+    <section className={cn("h-full w-full")}>
+      <Providers>{children}</Providers>
     </section>
   );
 }
