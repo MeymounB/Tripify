@@ -9,7 +9,6 @@ export const Routing = () => {
   const map = useMap();
   const { waypoints } = useContext(MapContext);
 
-  console.log(waypoints);
 
   useEffect(() => {
     if (!map) return;
@@ -25,7 +24,6 @@ export const Routing = () => {
       createMarker: () => null,
     }).addTo(map);
 
-    console.log(routingControl);
 
     routingControl.hide();
 
