@@ -2,8 +2,8 @@ export type SearchResult = {
   label: string;
   bounds: [[number, number], [number, number]];
   raw: SearchResultRaw;
-  x: number;
-  y: number;
+  x: number; // longitude
+  y: number; // latitude
 };
 
 export type SearchResultRaw = {
