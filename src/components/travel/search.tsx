@@ -36,6 +36,15 @@ const Search = ({ onSelect, children }: ISearch) => {
     setResults(results);
   };
 
+  const handleSelect = (value: string) => {
+    const result = results.find((r) => r.label === value);
+
+    if (!result) return;
+
+    onSelect(result);
+    setOpen(false);
+  };
+
   return (
     <div className="flex w-full">
       <Popover open={open} onOpenChange={setOpen}>
@@ -62,14 +71,7 @@ const Search = ({ onSelect, children }: ISearch) => {
                   <CommandItem
                     key={index}
                     value={result.label}
-                    onSelect={(value: string) => {
-                      const result = results.find((r) => r.label === value);
-
-                      if (!result) return;
-
-                      onSelect(result);
-                      setOpen(false);
-                    }}
+                    onSelect={handleSelect}
                   >
                     <span>{result.label}</span>
                   </CommandItem>
