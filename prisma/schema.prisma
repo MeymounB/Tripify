@@ -15,8 +15,8 @@ datasource db {
 
 // model example TO REPLACE
 
-model Cities {
+model User {
     id        Int      @id @default(autoincrement())
     name String 
-    postalCode Int
+    password String
 }
