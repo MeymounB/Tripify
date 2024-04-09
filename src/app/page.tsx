@@ -3,12 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import MapImage from "@/assets/homepage.png";
-import { getEvents } from "@/lib/utils";
 
 export default function Home() {
-  const CallApi = async (query: string) => {
-    getEvents(54600);
-  };
   return (
     <>
       <section className="flex w-full flex-col gap-6 px-60 pt-40">

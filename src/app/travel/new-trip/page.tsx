@@ -1,4 +1,5 @@
 import { LazyMap } from "@/components/map/map-lazy";
+import Poibutton from "@/components/travel/poibutton";
 import { Waypoints } from "@/components/travel/waypoints";
 
 export default function Page() {
@@ -9,6 +10,7 @@ export default function Page() {
       </div>
 
       <Waypoints />
+      <Poibutton />
     </div>
   );
 }
