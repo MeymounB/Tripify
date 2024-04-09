@@ -1,12 +1,19 @@
 import { expect, test, vi } from "vitest";
-import { Prisma } from "@prisma/client";
+import { prisma } from "@/lib/__mocks__/prisma";
+import { createUser } from "@/lib/actions/createUser";
 
-vi.mock("../lib/prisma");
+vi.mock("@/lib/__mocks__/prisma", async () => {
+  const actual = await vi.importActual("@/lib/__mocks__/prisma");
+  return { ...actual };
+});
 
-test("createCity should return the new city created", async () => {
-  const newCity: Prisma.UserCreateInput = {
-    name: "test",
-    password: "password",
-  };
-  expect(newCity.name).toEqual("test");
+test("createUser should return the user informations", async () => {
+  const newUser = { name: "test", password: "password" };
+  prisma.user.create.mockResolvedValue({
+    ...newUser,
+    id: 1,
+  });
+  const result = await createUser(newUser);
+
+  expect(result.name).toEqual("test");
 });

@@ -16,7 +16,7 @@ datasource db {
 // model example TO REPLACE
 
 model User {
-    id        Int      @id @default(autoincrement())
-    name String 
-    password String
+  id       Int    @id @default(autoincrement())
+  name     String
+  password String
 }
