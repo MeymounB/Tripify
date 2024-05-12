@@ -70,10 +70,17 @@ export function Navbar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          <NavigationMenuItem className="hidden sm:flex">
             <Link href="/docs" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Documentation
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="flex sm:hidden">
+            <Link href="/docs" legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <Icon icon="mdi:book" className="h-5 w-5" />
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
