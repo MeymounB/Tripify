@@ -7,27 +7,28 @@ import MapImage from "@/assets/homepage.png";
 export default function Home() {
   return (
     <>
-      <section className="flex w-full flex-col gap-6 px-60 pt-40">
-        <h1 className="w-[55rem] font-fugaz text-8xl uppercase">
-          Plan your trips in{" "}
-          <span className="underlineEffect text-primary">seconds</span>
-        </h1>
+      <div className="px-6 py-6 sm:px-20 lg:px-40 lg:py-12">
+        <section className="flex w-full flex-col gap-6">
+          <h1 className="sm:text-start text-center font-fugaz text-5xl uppercase md:text-6xl lg:text-7xl">
+            Plan your trips in{" "}
+            <span className="underlineEffect text-primary">seconds</span>
+          </h1>
 
-        <p className="w-[55rem] text-2xl">
-          With Tripify, select a start and a destination, we handle the rest for
-          you. Routing, Events, Hotels...{" "}
-        </p>
-      </section>
+          <p className="text-xl lg:text-2xl text-center sm:text-start">
+            With Tripify, select a start and a destination, we handle the rest
+            for you. Routing, Events, Hotels...
+          </p>
+        </section>
 
-      <AnimatedMap />
-
-      <section className="flex py-20">
-        <div className="flex w-1/2 flex-col gap-4 border p-10">
-          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-5xl uppercase text-transparent">
+        <AnimatedMap />
+      </div>
+      <section className="flex flex-col md:flex-row py-20">
+        <div className="flex  md:w-1/2 flex-col gap-4 border p-10">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl sm:text-4xl lg:text-5xl uppercase text-transparent">
             Automation
           </h2>
 
-          <p className="text-2xl">Tripify automates many things such as:</p>
+          <p className="text-xl lg:text-2xl">Tripify automates many things such as:</p>
 
           <ul className="list-disc">
             <li>Routing between your start and destination waypoints.</li>
@@ -39,12 +40,12 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="flex w-1/2 flex-col gap-4 border-y p-10">
-          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-5xl uppercase text-transparent">
+        <div className="flex md:w-1/2 flex-col gap-4 border-y p-10">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl sm:text-4xl lg:text-5xl uppercase text-transparent">
             Customization
           </h2>
 
-          <p className="text-2xl">Tripify allows you to customize your trip:</p>
+          <p className="text-xl lg:text-2xl">Tripify allows you to customize your trip:</p>
 
           <ul className="list-disc">
             <li>Chose a list of locations you want to visit.</li>
@@ -83,7 +84,7 @@ function AnimatedMap() {
 
   return (
     <section
-      className="flex w-full flex-col gap-6 px-60 py-12"
+      className="flex w-full flex-col gap-6 py-6 lg:py-12"
       onMouseMove={onMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
