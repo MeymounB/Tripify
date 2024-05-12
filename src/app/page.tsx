@@ -7,14 +7,14 @@ import MapImage from "@/assets/homepage.png";
 export default function Home() {
   return (
     <>
-      <div className="px-6 py-6 sm:px-20 lg:px-40 lg:py-12">
+      <div className="px-6 py-20 sm:px-20 lg:px-40">
         <section className="flex w-full flex-col gap-6">
-          <h1 className="sm:text-start text-center font-fugaz text-5xl uppercase md:text-6xl lg:text-7xl">
+          <h1 className="text-center font-fugaz text-5xl uppercase sm:text-start md:text-6xl lg:text-7xl">
             Plan your trips in{" "}
             <span className="underlineEffect text-primary">seconds</span>
           </h1>
 
-          <p className="text-xl lg:text-2xl text-center sm:text-start">
+          <p className="text-center text-xl sm:text-start lg:text-2xl">
             With Tripify, select a start and a destination, we handle the rest
             for you. Routing, Events, Hotels...
           </p>
@@ -22,13 +22,15 @@ export default function Home() {
 
         <AnimatedMap />
       </div>
-      <section className="flex flex-col md:flex-row py-20">
-        <div className="flex  md:w-1/2 flex-col gap-4 border p-10">
-          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl sm:text-4xl lg:text-5xl uppercase text-transparent">
+      <section className="flex flex-col py-20 md:flex-row">
+        <div className="flex  flex-col gap-4 border p-10 md:w-1/2">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl uppercase text-transparent sm:text-4xl lg:text-5xl">
             Automation
           </h2>
 
-          <p className="text-xl lg:text-2xl">Tripify automates many things such as:</p>
+          <p className="text-xl lg:text-2xl">
+            Tripify automates many things such as:
+          </p>
 
           <ul className="list-disc">
             <li>Routing between your start and destination waypoints.</li>
@@ -40,12 +42,14 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="flex md:w-1/2 flex-col gap-4 border-y p-10">
-          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl sm:text-4xl lg:text-5xl uppercase text-transparent">
+        <div className="flex flex-col gap-4 border-y p-10 md:w-1/2">
+          <h2 className="underlineEffect inline-block w-max bg-gradient-to-r from-foreground to-primary bg-clip-text font-fugaz text-3xl uppercase text-transparent sm:text-4xl lg:text-5xl">
             Customization
           </h2>
 
-          <p className="text-xl lg:text-2xl">Tripify allows you to customize your trip:</p>
+          <p className="text-xl lg:text-2xl">
+            Tripify allows you to customize your trip:
+          </p>
 
           <ul className="list-disc">
             <li>Chose a list of locations you want to visit.</li>
