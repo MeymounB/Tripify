@@ -25,19 +25,19 @@ export function Footer() {
               <span>France</span>
             </Link>
           </li>
-          <li className="">
+          <li>
             <Link href="/faq">FAQ</Link>
           </li>
-          <li className="">
+          <li>
             <Link href="/contact-us">Help</Link>
           </li>
-          <li className="">
+          <li>
             <Link href="/about">About Tripify</Link>
           </li>
-          <li className="">
+          <li>
             <Link href="/legal">Legal Notices</Link>
           </li>
-          <li className="">
+          <li>
             <Link href="/site-map">Site Map</Link>
           </li>
         </ul>
