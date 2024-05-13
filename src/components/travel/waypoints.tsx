@@ -17,7 +17,7 @@ interface IWaypoint {
   setCurrentHovered: (index: number | null) => void;
 }
 
-function Waypoint({
+export function Waypoint({
   value,
   index,
   moveWaypoints,
