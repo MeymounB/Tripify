@@ -3,12 +3,14 @@ import { Waypoints } from "@/components/travel/waypoints";
 
 export default function Page() {
   return (
-    <div className="flex h-full w-full gap-4 overflow-hidden p-20">
-      <div className="aspect-video flex-grow overflow-hidden rounded border">
+    <div className="relative flex h-full w-full flex-col gap-4 overflow-hidden p-20 lg:flex-row">
+      <div className="z-10 aspect-video flex-grow overflow-hidden rounded border">
         <LazyMap />
       </div>
 
-      <Waypoints />
+      <div className="z-11">
+        <Waypoints />
+      </div>
     </div>
   );
 }
