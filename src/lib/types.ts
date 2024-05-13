@@ -35,5 +35,9 @@ export type EventsType = {
   label?: string;
   latitude: string;
   longitude: string;
+  city?: string;
   postalCode?: number;
+  address?: string;
+  endDate?: string;
+  startDate?: string;
 };

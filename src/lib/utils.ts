@@ -16,7 +16,7 @@ export async function getEvents(
   try {
     const res = await fetch(`http://localhost:8080/?query=${query}`);
     const rawData = (await res.json()).data.poi.results;
-    const mappedData: EventsType = rawData.map((pointOfInterest: POI) => {
+    const mappedData: EventsType[] = rawData.map((pointOfInterest: POI) => {
       return {
         latitude:
           pointOfInterest.isLocatedAt[0].schema_geo[0].schema_latitude[0],
@@ -29,7 +29,7 @@ export async function getEvents(
         label: pointOfInterest?.rdfs_label[0]?.value,
       };
     });
-    console.log(mappedData);
+    return mappedData;
   } catch (e) {
     console.log(e);
   }

@@ -6,22 +6,31 @@ import { getEvents } from "@/lib/utils";
 type Props = {};
 
 function Poibutton({}: Props) {
-  const { waypoints, setWaypoints } = useContext(MapContext);
+  const { waypoints, events, setEvents } = useContext(MapContext);
   async function GetPOI(latitude: number, longitude: number, radius: number) {
     const response = await getEvents(latitude, longitude, radius);
+    response?.map((event) => {
+      console.log(event);
+      setEvents((prev) => [...prev, event]);
+    });
   }
   function handlePOIClick() {
     if (!waypoints) {
       return;
     }
-    const latitude = parseFloat(waypoints[0].raw.lat);
-    const longitude = parseFloat(waypoints[0].raw.lon);
-    GetPOI(latitude, longitude, 5);
+    waypoints.map((waypoint) => {
+      const latitude = parseFloat(waypoint.raw.lat);
+      const longitude = parseFloat(waypoint.raw.lon);
+      console.log(latitude, longitude);
+      GetPOI(latitude, longitude, 5);
+    });
   }
 
   return (
     <div>
-      <button onClick={(e) => handlePOIClick()}>BIG TEST FIND ME </button>
+      <button onClick={(e) => handlePOIClick()}>
+        Find events near your waypoints
+      </button>
     </div>
   );
 }
