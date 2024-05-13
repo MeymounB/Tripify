@@ -1,18 +1,20 @@
 "use client";
 
 import { LazySearch } from "@/components/travel/search-lazy";
-import { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { SearchResult } from "@/lib/types";
 import { MapContext } from "@/components/map/map-provider";
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface IWaypoint {
   index: number;
   value: string;
   moveWaypoints: (aIndex: number, bIndex: number) => void;
   updateWaypoint: (waypoint: SearchResult) => void;
+  removeWaypoint: (e: React.MouseEvent) => void;
   currentHovered: number | null;
   setCurrentHovered: (index: number | null) => void;
 }
@@ -22,6 +24,7 @@ function Waypoint({
   index,
   moveWaypoints,
   updateWaypoint,
+  removeWaypoint,
   currentHovered,
   setCurrentHovered,
 }: IWaypoint) {
@@ -94,12 +97,20 @@ function Waypoint({
       })}
     >
       <LazySearch onSelect={updateWaypoint}>
-        <div className="flex w-full items-center gap-2 p-2">
+        <div className="flex w-full items-center gap-2 p-1 pr-0">
           <Icon
             icon="akar-icons:drag-vertical-fill"
             className="aspect-square h-full flex-grow text-foreground/50"
           />
           <p className="w-full flex-shrink truncate">{value}</p>
+
+          <Button
+            className="ml-auto text-foreground/50 hover:text-red-500"
+            variant="ghost"
+            onClick={removeWaypoint}
+          >
+            <Icon width="20" icon="mdi:delete" className="h-full transition" />
+          </Button>
         </div>
       </LazySearch>
     </div>
@@ -135,6 +146,12 @@ export function Waypoints() {
     });
   };
 
+  const handleRemoveWaypoint = (e: React.MouseEvent, index: number) => {
+    e.stopPropagation();
+
+    setWaypoints(() => waypoints.filter((_, i) => i != index));
+  };
+
   return (
     <div className="flex w-[400px] flex-col gap-1">
       {waypoints.map((waypoint, index) => (
@@ -144,13 +161,14 @@ export function Waypoints() {
           value={waypoint.label}
           moveWaypoints={handleMoveWaypoints}
           updateWaypoint={(waypoint) => handleUpdateWaypoint(index, waypoint)}
+          removeWaypoint={(e) => handleRemoveWaypoint(e, index)}
           currentHovered={currentHovered}
           setCurrentHovered={setCurrentHovered}
         />
       ))}
 
       <LazySearch onSelect={handleAddWaypoint}>
-        <div className="flex w-full items-center gap-2 p-2">
+        <div className="flex w-full items-center gap-2 p-1">
           <Icon icon="akar-icons:plus" className="h-3 w-3 text-foreground/50" />
           <p>Add waypoint</p>
         </div>
