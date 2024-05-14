@@ -2,7 +2,7 @@ name: Mirror
 
 on:
   push:
-    branches: [ "master", "dev" ]
+    branches: [ ]
 
 env:
   MIRROR_URL: "git@github.com:EpitechMscProPromo2025/T-WEB-800-PAR_10.git"
