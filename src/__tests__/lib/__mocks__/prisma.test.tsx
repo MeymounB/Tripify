@@ -1,19 +1,16 @@
-import { describe, it } from "vitest";
-import sinon from "sinon";
+import { createUser } from "@/lib/__mocks__/prisma";
 import { prisma } from "@/lib/__mocks__/prisma";
+import { describe, it, expect } from "vitest";
 
-describe("Prisma Mock", () => {
-  it("should reset the mock before each test", async () => {
-    // Arrange
-    const originalUserFindMany = prisma.user.findMany;
+describe("createUser", () => {
+  it("should create a user", async () => {
+    const userData = { name: "John", email: "john@example.com" };
+    prisma.user.create.mockResolvedValue({ id: 1, ...userData });
 
-    // Act
-    prisma.user.findMany = sinon.stub().returns(Promise.resolve([]));
-    await new Promise((resolve) => setTimeout(resolve, 0)); // wait for next tick
-
-    // Assert
-    if (prisma.user.findMany === originalUserFindMany) {
-      throw new Error("Mock was not reset");
-    }
+    const result = await createUser(userData);
+    expect(result).toEqual({ id: 1, name: "John", email: "john@example.com" });
+    expect(prisma.user.create).toHaveBeenCalledWith({
+      data: userData,
+    });
   });
 });

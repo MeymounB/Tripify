@@ -1,47 +1,28 @@
-import { describe, it } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
+import { createUser } from "@/lib/actions/createUser";
+import prisma from "@/lib/prisma";
 
-describe("createUser", () => {
-  it("should pass", async () => {
-    if (1 !== 1) {
-      throw new Error("Dummy test failed");
-    }
-  });
+beforeEach(() => {
+  vi.clearAllMocks();
+  prisma.user.create = vi.fn();
 });
 
-// import { describe, it } from "vitest";
-// import sinon from "sinon";
-// import { Prisma } from "@prisma/client";
-// import prisma from "@/lib/prisma";
-// import { createUser } from "@/lib/actions/createUser";
+describe("createUser function", () => {
+  it("creates a user successfully", async () => {
+    const mockUser = { id: 1, name: "John Doe", password: "securePassword" };
+    prisma.user.create.mockResolvedValue(mockUser);
 
-// describe("createUser", () => {
-//   it("should create a user", async () => {
-//     const newUser: Prisma.UserCreateInput = {
-//       name: "Test User",
-//       password: "password",
-//     };
+    const newUser = { name: "John Doe", password: "securePassword" };
 
-//     const mockUser = {
-//       id: 1,
-//       ...newUser,
-//     };
+    const result = await createUser(newUser);
 
-//     const prismaStub = sinon.stub(prisma.user, "create").resolves(mockUser);
+    expect(prisma.user.create).toHaveBeenCalledWith({
+      data: {
+        name: newUser.name,
+        password: newUser.password,
+      },
+    });
 
-//     const user = await createUser(newUser);
-
-//     if (
-//       !user ||
-//       user.name !== mockUser.name ||
-//       user.password !== mockUser.password
-//     ) {
-//       throw new Error("User creation failed");
-//     }
-
-//     if (!prismaStub.calledOnce) {
-//       throw new Error("Prisma create method not called");
-//     }
-
-//     prismaStub.restore();
-//   });
-// });
+    expect(result).toEqual(mockUser);
+  });
+});
