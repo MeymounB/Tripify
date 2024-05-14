@@ -1,5 +1,4 @@
 import { LazyMap } from "@/components/map/map-lazy";
-import Poibutton from "@/components/travel/poibutton";
 import { Waypoints } from "@/components/travel/waypoints";
 
 export default function Page() {
@@ -8,9 +7,7 @@ export default function Page() {
       <div className="aspect-video flex-grow overflow-hidden rounded border">
         <LazyMap />
       </div>
-
       <Waypoints />
-      <Poibutton />
     </div>
   );
 }

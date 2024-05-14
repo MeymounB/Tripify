@@ -5,7 +5,7 @@ interface IMapContext {
   waypoints: SearchResult[];
   setWaypoints: (waypoints: (prev: SearchResult[]) => SearchResult[]) => void;
   events: EventsType[];
-  setEvents: (events: (prev: EventsType[]) => EventsType[]) => void;
+  setEvents: (events: (prev: EventsType[]) => EventsType[] | []) => void;
 }
 
 export const MapContext = createContext({

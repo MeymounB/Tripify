@@ -28,6 +28,12 @@ export type POI = {
     schema_geo: { schema_latitude: number[]; schema_longitude: number[] }[];
     schema_address: { schema_postalCode: string[] }[];
   }[];
+  takesPlaceAt: {
+    startDate: string;
+    endDate: string;
+    startTime: string;
+    endTime: string;
+  }[];
   rdfs_label: { value: string }[];
 };
 
@@ -38,6 +44,8 @@ export type EventsType = {
   city?: string;
   postalCode?: number;
   address?: string;
-  endDate?: string;
-  startDate?: string;
+  endDate: string | null;
+  endTime: string | null;
+  startDate: string | null;
+  startTime: string | null;
 };
