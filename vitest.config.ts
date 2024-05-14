@@ -9,6 +9,8 @@ export default defineConfig({
     coverage: {
       provider: "v8", // or 'istanbul'
     },
+    globals: true,
+    setupFiles: [".setupTests.js"],
   },
   resolve: {
     alias: [{ find: "@", replacement: resolve(__dirname, "./src") }],
