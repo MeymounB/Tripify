@@ -7,7 +7,10 @@ import Link from "next/link";
 export function Footer() {
   return (
     <>
-      <footer className="forground z-30 border-t px-5 md:px-20">
+      <footer
+        data-testid="testFooter"
+        className="forground z-30 border-t px-5 md:px-20"
+      >
         <div className="flex w-full justify-center border-b md:justify-start">
           <div className="w-max bg-gradient-to-r from-foreground to-primary bg-clip-text py-8 font-fugaz text-2xl uppercase text-transparent md:justify-start md:text-2xl">
             <Link href="/">Tripify</Link>
