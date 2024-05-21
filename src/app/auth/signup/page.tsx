@@ -1,7 +1,7 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { FormEventHandler, useState } from "react";
+import { createUser } from "@/lib/actions/createUser";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
@@ -10,16 +10,12 @@ export default function Page() {
   const router = useRouter();
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    setError("");
 
-    const res = await signIn("credentials", {
-      email: userInfo.email,
-      password: userInfo.password,
-      redirect: false,
-    });
+    const res = await createUser(userInfo);
 
-    if (res?.error) return console.error(res.error);
-
-    router.push("/travel/new-trip");
+    if (res.error) return setError(res.error);
+    else router.push("/auth/signin");
   };
 
   return (
@@ -27,8 +23,8 @@ export default function Page() {
       <div className="flex h-full min-h-[calc(100vh-56px-73px)] flex-col items-center justify-center gap-10 bg-secondary px-5 sm:px-10 md:flex-row md:gap-20">
         <div className="sign-in-form">
           <form onSubmit={handleSubmit}>
-            <p className="text-red-500">{error}</p>
             <h1>Login</h1>
+            <p className="text-red-500">{error}</p>
             <input
               value={userInfo.email}
               onChange={({ target }) =>
@@ -47,7 +43,7 @@ export default function Page() {
               placeholder="*******"
             />
 
-            <input type="submit" value="login" />
+            <input type="submit" value="signup" />
           </form>
         </div>
       </div>

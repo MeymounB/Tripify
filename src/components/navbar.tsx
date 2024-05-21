@@ -15,6 +15,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { useSession } from "next-auth/react";
 
 interface Feature {
   title: string;
@@ -38,8 +39,10 @@ const features: Array<Feature> = [
 ];
 
 export function Navbar() {
+  const session = useSession();
+
   return (
-    <div className="relative z-20 w-full p-2">
+    <div className="relative z-20 flex w-full justify-between p-2">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -70,6 +73,35 @@ export function Navbar() {
             </NavigationMenuContent>
           </NavigationMenuItem>
 
+          {session.status == "authenticated" && (
+            <NavigationMenuItem>
+              <Link href="/api/auth/signout" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Sign out
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )}
+
+          {session.status == "unauthenticated" && (
+            <>
+              <NavigationMenuItem>
+                <Link href="/auth/signin" passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Sign in
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/auth/signup" passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Sign up
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </>
+          )}
+
           <NavigationMenuItem className="hidden sm:flex">
             <Link href="/docs" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -86,6 +118,12 @@ export function Navbar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
+
+      {session.status == "authenticated" && (
+        <div className="flex aspect-square h-12 items-center justify-center rounded-full bg-primary">
+          {session.data.user?.email?.split("")[0].toUpperCase()}
+        </div>
+      )}
     </div>
   );
 }
