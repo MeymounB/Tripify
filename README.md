@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Tripify
 
-## Getting Started
+## Architecture des fichiers
 
-First, run the development server:
+L'application est structurée comme suit :
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- `src/` : Contient le code source de l'application.
+  - `lib/` : Contient les fonctions utilitaires et les actions de l'application.
+    - `actions/` : Contient les actions de l'application, comme `createUser.ts` pour la création d'un utilisateur.
+    - `map.ts` : Contient les fonctions liées à la carte.
+  - `app/` : Contient le code de l'application principale.
+    - `travel/` : Contient le code lié aux voyages.
+      - `new-trip/` : Contient le code pour la création d'un nouveau voyage.
+- `prisma/` : Contient le schéma Prisma pour la base de données.
+  - `schema.prisma` : Le schéma de la base de données.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack technique
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Langages : TypeScript, SQL, JavaScript
+- Gestionnaire de paquets : npm
+- Frameworks : React
+- Base de données : PostgreSQL avec Prisma comme ORM
+- Cartographie : Leaflet avec le fournisseur OpenStreetMap
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Exigences
 
-## Learn More
+- Node.js et npm installés sur votre machine.
+- PostgreSQL installé et configuré sur votre machine.
+- Un compte GitHub pour cloner le dépôt.
 
-To learn more about Next.js, take a look at the following resources:
+## Développement local
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clonez le dépôt sur votre machine locale.
+2. Installez les dépendances avec `npm install`.
+3. Configurez votre base de données PostgreSQL et mettez à jour le fichier `.env` avec l'URL de votre base de données.
+4. Exécutez les migrations de la base de données avec `npx prisma migrate dev`.
+5. Démarrez l'application avec `npm start`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tests
 
-## Deploy on Vercel
+Pour tester l'application localement, suivez les étapes suivantes :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Installez les dépendances de test avec `npm install --only=dev`.
+2. Exécutez les tests avec `npm test`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Note : Assurez-vous que votre base de données est correctement configurée avant de lancer les tests.
