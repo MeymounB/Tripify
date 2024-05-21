@@ -49,16 +49,11 @@ const Search = ({ onSelect, children }: ISearch) => {
     <div className="flex w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" className="w-[400px] p-0">
+          <Button variant="outline" className="w-full p-0">
             {children}
           </Button>
         </PopoverTrigger>
-        <PopoverContent
-          asChild
-          className="w-[400px]"
-          side="bottom"
-          align="start"
-        >
+        <PopoverContent asChild className="w-full" side="bottom" align="start">
           <Command>
             <CommandInput
               placeholder="Change status..."
