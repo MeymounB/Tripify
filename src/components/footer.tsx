@@ -41,6 +41,12 @@ export function Footer() {
             <Link href="/site-map">Site Map</Link>
           </li>
         </ul>
+        <a
+          href="https://www.flaticon.com/fr/icones-gratuites/epingle"
+          title="épingle icônes"
+        >
+          Épingle icônes créées par Freepik - Flaticon
+        </a>
         <div className="flex justify-center py-5 md:hidden">
           <Link href="/commitments" className="flex items-center gap-2">
             <Image width={25} height={20} src="/France.svg" alt="France" />
