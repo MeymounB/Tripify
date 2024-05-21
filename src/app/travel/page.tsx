@@ -11,7 +11,7 @@ import {
 export default function Page() {
   return (
     <>
-      <div className="flex h-full min-h-[calc(100vh-56px-73px)] flex-col items-center justify-center gap-10 bg-secondary px-5 sm:px-10 md:flex-row md:gap-20">
+      <div className="flex h-full min-h-[calc(100vh-56px-73px)] flex-col items-center justify-center gap-5 bg-secondary p-5 sm:flex-row sm:px-10 md:gap-20">
         <Card className="w-[300px]">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl lg:text-4xl">New trip</CardTitle>
