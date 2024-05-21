@@ -91,7 +91,7 @@ export function Waypoint({
   return (
     <div
       ref={ref}
-      className={cn("w-[400px] rounded-lg border-y-2 border-y-transparent", {
+      className={cn("w-full rounded-lg border-y-2 border-y-transparent", {
         "border-b-sky-500 border-t-transparent": currentHovered === index + 1,
         "border-b-transparent border-t-sky-500": currentHovered === index,
       })}
@@ -102,10 +102,10 @@ export function Waypoint({
             icon="akar-icons:drag-vertical-fill"
             className="aspect-square h-full flex-grow text-foreground/50"
           />
-          <p className="w-full flex-shrink truncate">{value}</p>
+          <p className="w-full flex-shrink truncate text-start">{value}</p>
 
           <Button
-            className="ml-auto text-foreground/50 hover:text-red-500"
+            className="ml-auto w-16 text-foreground/50 hover:text-red-500"
             variant="ghost"
             onClick={removeWaypoint}
           >
@@ -153,7 +153,7 @@ export function Waypoints() {
   };
 
   return (
-    <div className="flex w-[400px] flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       {waypoints.map((waypoint, index) => (
         <Waypoint
           key={index}
