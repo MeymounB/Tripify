@@ -13,10 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model example TO REPLACE
-
 model User {
-  id       Int    @id @default(autoincrement())
-  name     String
-  password String
+  id            String    @id @default(cuid())
+  email         String   @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
