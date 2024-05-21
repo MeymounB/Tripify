@@ -20,3 +20,21 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
+
+model Route {
+  id            String    @id @default(cuid())
+  waypoints     Waypoint[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Waypoint {
+  id            String    @id @default(cuid())
+  route         Route     @relation(fields: [routeId], references: [id])
+  routeId       String
+  latitude      Float
+  longitude     Float
+  name          String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
