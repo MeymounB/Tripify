@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 import { Icon } from "@iconify/react";
 
 import { cn } from "@/lib/utils";
@@ -42,90 +42,102 @@ export function Navbar() {
   const session = useSession();
 
   return (
-    <div className="relative z-20 flex w-full justify-between p-2">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink
-                className={`${navigationMenuTriggerStyle()} gap-2 `}
-              >
-                <Icon icon="mdi:home" className="h-5 w-5" />
-                Home
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Travel</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                {features.map((component) => (
-                  <NavbarSubItem
-                    key={component.title}
-                    title={component.title}
-                    href={component.href}
-                  >
-                    {component.description}
-                  </NavbarSubItem>
-                ))}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-
-          {session.status == "authenticated" && (
-            <NavigationMenuItem>
-              <Link href="/api/auth/signout" passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Sign out
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          )}
-
-          <NavigationMenuItem className="hidden sm:flex">
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Documentation
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="flex sm:hidden">
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <Icon icon="mdi:book" className="h-5 w-5" />
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
-
-      <NavigationMenu className="list-none">
-        {session.status == "unauthenticated" && (
-          <>
-            <NavigationMenuItem>
-              <Link href="/auth/signin" passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Sign in
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/auth/signup" passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Sign up
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          </>
-        )}
-      </NavigationMenu>
-
-      {session.status == "authenticated" && (
-        <div className="flex aspect-square h-12 items-center justify-center rounded-full bg-primary">
-          {session.data.user?.email?.split("")[0].toUpperCase()}
+    <div>
+      <div className="z-21 absolute right-[50%] top-0 translate-x-[50%]">
+        <div className="flex w-full items-center justify-center">
+          <Image
+            src="/android-chrome-512x512.png"
+            width={100}
+            height={100}
+            alt="logo"
+          />
         </div>
-      )}
+      </div>
+      <div className="relative z-20 flex w-full justify-between p-2">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem className="flex items-center px-4">
+              <Link href="/" legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={`${navigationMenuTriggerStyle()} gap-2 `}
+                >
+                  <Icon icon="mdi:home" className="h-5 w-5" />
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Travel</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                  {features.map((component) => (
+                    <NavbarSubItem
+                      key={component.title}
+                      title={component.title}
+                      href={component.href}
+                    >
+                      {component.description}
+                    </NavbarSubItem>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            {session.status == "authenticated" && (
+              <NavigationMenuItem>
+                <Link href="/api/auth/signout" passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Sign out
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            )}
+
+            <NavigationMenuItem className="hidden sm:flex">
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Documentation
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem className="flex sm:hidden">
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <Icon icon="mdi:book" className="h-5 w-5" />
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+
+        <NavigationMenu className="list-none">
+          {session.status == "unauthenticated" && (
+            <>
+              <NavigationMenuItem>
+                <Link href="/auth/signin" passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Sign in
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/auth/signup" passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Sign up
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </>
+          )}
+        </NavigationMenu>
+
+        {session.status == "authenticated" && (
+          <div className="flex aspect-square h-12 items-center justify-center rounded-full bg-primary">
+            {session.data.user?.email?.split("")[0].toUpperCase()}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
