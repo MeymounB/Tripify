@@ -83,25 +83,6 @@ export function Navbar() {
             </NavigationMenuItem>
           )}
 
-          {session.status == "unauthenticated" && (
-            <>
-              <NavigationMenuItem>
-                <Link href="/auth/signin" passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Sign in
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Link href="/auth/signup" passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Sign up
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </>
-          )}
-
           <NavigationMenuItem className="hidden sm:flex">
             <Link href="/docs" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -117,6 +98,27 @@ export function Navbar() {
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
+      </NavigationMenu>
+
+      <NavigationMenu className="list-none">
+        {session.status == "unauthenticated" && (
+          <>
+            <NavigationMenuItem>
+              <Link href="/auth/signin" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Sign in
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/auth/signup" passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Sign up
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </>
+        )}
       </NavigationMenu>
 
       {session.status == "authenticated" && (
